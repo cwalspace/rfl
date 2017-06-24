@@ -1,0 +1,8 @@
+/CMakeFiles
+/CMakeCache.txt
+/Makefile
+*.cmake
+*.exe
+/rfl
+/cmake_install.cmake
+.DS_Store
