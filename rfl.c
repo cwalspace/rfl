@@ -21,31 +21,33 @@ update_list( char *file_name, time_t *prev_mtime, array *list )
         return 0;
 
     rf = fopen( file_name, "r" );
-	
-	if( !rf )
-		return -1;
-	
-	// creating a new list to replace the old one
+    
+    if( !rf )
+        return -1;
+    
+    // creating a new list to replace the old one
     new_list = anew();
-	assert( new_list );
-	
-	/* temp buffer */
-	tmp = ( char * )malloc( TMP_SM );
-	assert( tmp );
-	
+    assert( new_list );
+    
+    // tmp buf
+    tmp = ( char * )malloc( TMP_SM );
+    assert( tmp );
+    
     while ( !feof( rf ) ) {
         if( !fgets( tmp, TMP_SM, rf ) )
-			continue;
+            continue;
 
-        // trimming 
-        if ( LASTCHAR( tmp ) == 0x0A )
-            LASTCHAR( tmp ) = 0;
+        // trimming CR LF
+        for ( int i = 0; i < 2; i++ ) {
+            if ( LASTCHAR( tmp ) == 0x0A || LASTCHAR( tmp ) == 0x0D )
+                LASTCHAR( tmp ) = 0;
+        }
         
         // trying to add new entry, aadd will create string copy for us
         aadd( new_list, tmp );
     }
-	free( tmp );
-	
+    free( tmp );
+    
     fclose( rf );
 
     // terminating all threads to swap lists
@@ -171,6 +173,9 @@ http_request( void *arg )
 int 
 main( int argc, char **argv )
 {
+    printf( "\nCheck out free new hosts for your links on http://cwal.space/runforlinks\n\n" );
+    sleep(1);
+    
     if ( argc < ARGS_COUNT ) {
         printf( "Usage: ./<this> <max threads> <path to hosts.txt> <path to refs.txt>\nFile data format: <line>\\0x0A\n" );
 
