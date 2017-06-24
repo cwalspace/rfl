@@ -1,6 +1,6 @@
 # roll for life readme
 
-## build and install
+## build
 ```
 cmake CMakeLists.txt
 make
