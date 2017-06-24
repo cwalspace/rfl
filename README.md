@@ -12,7 +12,7 @@ make
 ```
 place http:// or https:// at the start of your domains
 ```
-2. put domains which flush out referral info on their websites in hosts.txt
+2. add domains to hosts.txt that output referral links on their website
 ```
 do not use http:// or https:// here
 ```
@@ -31,4 +31,4 @@ line1
 line2
 ``` 
 - right now everything is random, i will add new options in the future
-- you can check out free host list (updated sometimes!) at http://cwal.space/runforlinks
+- you can check out free host list (periodically updated) at http://cwal.space/runforlinks
